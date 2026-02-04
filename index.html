@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>FinCrime OS – Global AML & Fraud Workbench</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #020617;
+      color: #e5e7eb;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1.2fr) minmax(0, 1.4fr);
+      gap: 12px;
+      padding: 14px;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+    @media (max-width: 960px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+    }
+    .panel {
+      background: radial-gradient(circle at top left, #020617, #020617);
+      border-radius: 14px;
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      padding: 14px 16px;
+      box-shadow: 0 20px 45px rgba(0,0,0,0.65);
+      box-sizing: border-box;
+    }
+    h1 {
+      font-size: 1.4rem;
+      margin: 0 0 4px;
+    }
+    h2 {
+      font-size: 0.96rem;
+      margin: 0 0 8px;
+      color: #a5b4fc;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    p {
+      margin: 4px 0 8px;
+      color: #9ca3af;
+      font-size: 0.85rem;
+    }
+    label {
+      display: block;
+      font-size: 0.8rem;
+      margin-bottom: 3px;
+      color: #9ca3af;
+    }
+    select, textarea, input {
+      width: 100%;
+      padding: 7px 9px;
+      border-radius: 8px;
+      border: 1px solid #4b5563;
+      background: #020617;
+      color: #e5e7eb;
+      font-size: 0.85rem;
+      box-sizing: border-box;
+    }
+    textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .row > div {
+      flex: 1 1 120px;
+    }
+    button {
+      background: linear-gradient(to right, #6366f1, #a855f7);
+      color: white;
+      border: none;
+      border-radius: 999px;
+      padding: 7px 16px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      margin-top: 10px;
+      box-shadow: 0 14px 30px rgba(79, 70, 229, 0.5);
+    }
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid #4b5563;
+      font-size: 0.72rem;
+      color: #9ca3af;
+      margin-right: 4px;
+      margin-bottom: 4px;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      border: 1px solid #4b5563;
+      margin-right: 6px;
+      margin-bottom: 6px;
+    }
+    .pill.high { border-color: #f97373; color: #fecaca; }
+    .pill.medium { border-color: #facc15; color: #fef9c3; }
+    .pill.low { border-color: #22c55e; color: #bbf7d0; }
+    .section-list {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+    .section-list li::before {
+      content: "• ";
+      color: #6366f1;
+    }
+    .section-list li {
+      margin-bottom: 4px;
+      font-size: 0.82rem;
+    }
+    .small {
+      font-size: 0.72rem;
+      color: #6b7280;
+    }
+    .top-title {
+      margin-bottom: 10px;
+      border-bottom: 1px solid rgba(148,163,184,0.2);
+      padding-bottom: 8px;
+    }
+    .copy-btn {
+      font-size: 0.72rem;
+      padding: 4px 10px;
+      margin-left: 8px;
+      background: transparent;
+      border-radius: 999px;
+      border: 1px solid #4b5563;
+      color: #9ca3af;
+      box-shadow: none;
+    }
+    .copy-btn:hover {
+      background: #020617;
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <!-- LEFT PANEL: META -->
+    <div class="panel">
+      <div class="top-title">
+        <h1>FinCrime OS</h1>
+        <p>Global AML & fraud analyst workbench – runs in your browser, no login.</p>
+        <span class="badge">Open rules</span>
+        <span class="badge">Client-side</span>
+        <span class="badge">Analyst focused</span>
+      </div>
+
+      <h2>Context</h2>
+      <div class="row">
+        <div>
+          <label for="country">Jurisdiction</label>
+          <select id="country">
+            <option value="GLOBAL">Global / FATF-style</option>
+            <option value="IN">India (RBI / FIU-IND)</option>
+            <option value="EU">European Union</option>
+            <option value="US">United States (BSA/AML)</option>
+            <option value="OTHER">Other / Not specified</option>
+          </select>
+        </div>
+        <div>
+          <label for="domain">Domain</label>
+          <select id="domain">
+            <option value="marketplace">Marketplace / Platforms</option>
+            <option value="psp">Payment Gateway / PSP / Fintech</option>
+            <option value="banking">Banking</option>
+            <option value="cards">Cards / Chargebacks</option>
+            <option value="crypto">Crypto / VASPs</option>
+            <option value="remittance">Remittances / MSBs</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top:8px;">
+        <div>
+          <label for="product">Product / Channel</label>
+          <select id="product">
+            <option>3P Seller</option>
+            <option>Buyer</option>
+            <option>Card Payments</option>
+            <option>CNP</option>
+            <option>Wallets</option>
+            <option>Payouts</option>
+            <option>Current Account</option>
+            <option>Salary Account</option>
+            <option>Subscription</option>
+          </select>
+        </div>
+        <div>
+          <label for="customerType">Customer type</label>
+          <select id="customerType">
+            <option>Retail</option>
+            <option>SME</option>
+            <option>Corporate</option>
+            <option>NPO / Charity</option>
+            <option>PEP / High Risk</option>
+          </select>
+        </div>
+      </div>
+
+      <h2 style="margin-top:14px;">Key facts (optional)</h2>
+      <div class="row">
+        <div>
+          <label for="amountBand">Amount band</label>
+          <select id="amountBand">
+            <option>Not specified</option>
+            <option>Low</option>
+            <option>Medium</option>
+            <option>High</option>
+          </select>
+        </div>
+        <div>
+          <label for="volumeBand">Volume band</label>
+          <select id="volumeBand">
+            <option>Not specified</option>
+            <option>Few</option>
+            <option>Many</option>
+            <option>Very many</option>
+          </select>
+        </div>
+        <div>
+          <label for="crossBorder">Cross-border?</label>
+          <select id="crossBorder">
+            <option>Unknown</option>
+            <option>Yes</option>
+            <option>No</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- CENTER PANEL: SCENARIO -->
+    <div class="panel">
+      <h2>Scenario</h2>
+      <p class="small">Paste a brief description. Avoid PII; focus on behaviour and pattern.</p>
+      <textarea id="scenario" placeholder="Example: 3P seller and a few buyers share devices and addresses. High volume of orders between them, most refunded within 48 hours. Courier logs show no pickups."></textarea>
+
+      <button id="analyzeBtn">Analyse pattern</button>
+      <p class="small" style="margin-top:6px;">Your input stays in your browser. No data is sent to any server.</p>
+    </div>
+
+    <!-- RIGHT PANEL: RESULTS -->
+    <div class="panel" id="results" style="display:none;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+        <h2>Typologies & risk</h2>
+        <button class="copy-btn" id="copyAllBtn">Copy full card</button>
+      </div>
+      <div id="typologyPills" style="margin-bottom:6px;"></div>
+      <div id="priorityPill"></div>
+      <p id="priorityReason" class="small"></p>
+
+      <h2 style="margin-top:14px;">Narrative summary</h2>
+      <p id="narrativeSummary"></p>
+
+      <h2 style="margin-top:14px;">Draft STR / SAR paragraph</h2>
+      <p id="sarParagraph" class="small"></p>
+
+      <h2 style="margin-top:14px;">Red flags</h2>
+      <ul class="section-list" id="redFlags"></ul>
+
+      <h2 style="margin-top:14px;">Casework checklist</h2>
+      <ul class="section-list" id="checks"></ul>
+
+      <h2 style="margin-top:14px;">Country / regulator notes</h2>
+      <ul class="section-list" id="countryNotes"></ul>
+
+      <h2 style="margin-top:14px;">Pitfalls to avoid</h2>
+      <ul class="section-list" id="pitfalls"></ul>
+
+      <p class="small" style="margin-top:10px;">
+        For training and analytical support only. Does not constitute legal advice or replace your institution's policies.
+      </p>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
