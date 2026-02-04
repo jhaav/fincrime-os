@@ -1,0 +1,111 @@
+[
+  {
+    "id": "mp_collusion_buyer_seller",
+    "name": "Marketplace buyer–seller collusion",
+    "domains": ["marketplace"],
+    "products": ["3P Seller", "Buyer"],
+    "countries": ["GLOBAL", "IN", "EU", "US"],
+    "keywords_any": [
+      "fake order", "fake orders", "no shipment", "no delivery", "related party",
+      "same device", "same ip", "same address", "refund", "cashback abuse",
+      "promotion abuse", "order wash", "review manipulation"
+    ],
+    "base_priority": "High",
+    "red_flags": [
+      "High order volume between a small set of counterparties.",
+      "Many orders quickly refunded or cancelled.",
+      "Shared devices/IPs or addresses across buyer and seller accounts."
+    ],
+    "recommended_checks": [
+      "Link buyers and sellers via device, IP, address, and payment instruments.",
+      "Compare order and refund ratios vs peer sellers in the same category.",
+      "Review shipping and delivery evidence, including courier tracking and POD.",
+      "Check internal notes or messages for indications of off-platform coordination."
+    ],
+    "sar_str_angles": [
+      "Explain why the pattern suggests collusion instead of legitimate repeat business.",
+      "Quantify total suspicious order and refund value.",
+      "Highlight any cross-border flows or rapid settlements to external accounts."
+    ],
+    "country_notes": {
+      "GLOBAL": "Pattern broadly aligns with typical collusion indicators under a risk-based AML framework.",
+      "IN": "Indian platforms/payment providers often consider such collusion as abuse of marketplace and cashback programmes, requiring enhanced monitoring.",
+      "EU": "EU institutions may treat such behaviour as fraud/abuse impacting both consumers and platforms under AMLD risk-based obligations.",
+      "US": "US platforms may consider this under fraud/abuse and potential money laundering if proceeds are layered through accounts."
+    },
+    "pitfalls": [
+      "Do not assume all repeat purchases are collusion; contextualize with product type and marketing campaigns.",
+      "Shared devices/IPs can reflect family or shared-office use; check full context."
+    ]
+  },
+  {
+    "id": "psp_friendly_fraud_chargeback_abuse",
+    "name": "Friendly fraud / chargeback abuse",
+    "domains": ["psp", "cards"],
+    "products": ["Card Payments", "CNP", "Subscription"],
+    "countries": ["GLOBAL"],
+    "keywords_any": [
+      "chargeback", "dispute", "not received", "item not received",
+      "unauthorized", "arbitration", "refund", "reason code"
+    ],
+    "base_priority": "Medium",
+    "red_flags": [
+      "Spike in chargebacks on specific SKUs or merchants.",
+      "Disputes concentrated on certain geographies or BINs.",
+      "Cardholder has history of similar disputes across multiple merchants."
+    ],
+    "recommended_checks": [
+      "Review transaction history of the cardholder across time.",
+      "Inspect merchant descriptors, MCC codes, and product types involved.",
+      "Check 3DS/SCA logs, AVS/CVV results, and other authentication factors.",
+      "Collect and review delivery proof, invoices, and merchant communication."
+    ],
+    "sar_str_angles": [
+      "Describe pattern of repeated disputes indicating potential intentional abuse.",
+      "Quantify actual and potential loss exposure from the pattern.",
+      "Highlight any collusive merchants or unusual refund patterns."
+    ],
+    "country_notes": {
+      "GLOBAL": "Chargeback abuse is usually handled via card scheme rules; SAR filing is considered when patterns suggest organized or repeated fraud."
+    },
+    "pitfalls": [
+      "Do not treat every chargeback as fraud; separate merchant quality issues from abuse.",
+      "Consider consumer protection rules and regulatory expectations on fair treatment."
+    ]
+  },
+  {
+    "id": "bank_mule_account_pass_through",
+    "name": "Mule / pass-through account",
+    "domains": ["banking", "psp"],
+    "products": ["Current Account", "Salary Account", "Wallets", "Payouts"],
+    "countries": ["GLOBAL"],
+    "keywords_any": [
+      "many small credits", "multiple small credits", "rapid cash out", "cash-out",
+      "immediate withdrawal", "no salary", "unusual incoming", "no clear source of funds"
+    ],
+    "base_priority": "High",
+    "red_flags": [
+      "Multiple incoming credits from unrelated counterparties within short time windows.",
+      "Rapid cash-outs or outward transfers, leaving low end-of-day balances.",
+      "No clear economic purpose consistent with customer profile."
+    ],
+    "recommended_checks": [
+      "Profile the customer (occupation, KYC data, stated transaction purpose).",
+      "Cluster counterparties and look for common devices, IPs, or merchants.",
+      "Review historical behaviour before and after suspicious period.",
+      "Check for links to known fraud, scam, or crypto off-ramps."
+    ],
+    "sar_str_angles": [
+      "Explain why behaviour resembles pass-through activity inconsistent with profile.",
+      "Quantify volume and velocity of suspicious flows.",
+      "Highlight risk of the account being used as a mule in broader fraud schemes."
+    ],
+    "country_notes": {
+      "GLOBAL": "Mule/pass-through accounts are a common indicator of broader fraud or scam operations and often warrant SAR/STR consideration."
+    },
+    "pitfalls": [
+      "Do not assume all fragmented payments are mule activity; consider gig-economy patterns.",
+      "Avoid mirror imaging; some markets have naturally high payment fragmentation."
+    ]
+  }
+]
